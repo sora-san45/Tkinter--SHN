@@ -1,6 +1,8 @@
 # Tkinter--SHN
 
+# Random Movie Generator
 
+Random Movie Generator made by using Tkinter library of Python.
 
 # Team Members
 
