@@ -1,24 +1,31 @@
 from tkinter import *
 from PIL import Image,ImageTk
+import os
 import requests
-from urllib.request import urlopen
+from io import BytesIO
 
 tk=Tk()
+tk.geometry("700x500")
+
+
 tk.title('Movies')  
+frame = Frame(tk, width=100, height=200)
+frame.pack()
+frame.place(anchor='center', relx=0.5, rely=0.5)
 def get_movie():
     r=requests.get('http://www.omdbapi.com/?i=tt3896198&apikey=cecf960d')
     data = r.json()
     image1=data["Poster"]
-    print(image1)
-    u=urlopen(image1)
-    raw_data=u.read()
-    u.close()
-    img=ImageTk.PhotoImage(data=raw_data)
-    label=Label(tk,image=img)
-text_box = Text(tk, height=10, width=50)
+    image1=str(image1)
+    response = requests.get(image1)
+    img_data = response.content
+    img = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
+    return img
+    
 get_button = Button(tk, text="Get Movie", command=get_movie)
-  
-text_box.pack()
-get_button.pack()
+get_button.place(relx=0.5,rely=0.9,anchor=S)
+img=get_movie()
+label = Label(frame, image=img)
+label.pack(side="bottom", fill="both", expand="yes")
 tk.mainloop()
 
