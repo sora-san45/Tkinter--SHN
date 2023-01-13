@@ -14,7 +14,7 @@ frame.pack()
 frame.place(anchor='center', relx=0.5, rely=0.5)
 def get_movie():
     r=requests.get('http://www.omdbapi.com/?i=tt3896198&apikey=cecf960d')
-    data = r.json()
+    data =r.json()
     image1=data["Poster"]
     image1=str(image1)
     response = requests.get(image1)
